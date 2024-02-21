@@ -71,6 +71,7 @@ type Configuration struct {
 	GlobalMemoryResourceLimit        string
 	BackupImage                      string
 	ImageSecrets                     []string
+	Insecure                         string
 	BackupCommandRestic              []string
 	MetricsBindAddress               string
 	PodExecRoleName                  string
