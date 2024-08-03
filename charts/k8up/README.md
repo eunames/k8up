@@ -1,6 +1,6 @@
 # k8up
 
-![Version: 4.8.0](https://img.shields.io/badge/Version-4.8.0-informational?style=flat-square)
+![Version: 4.8.1](https://img.shields.io/badge/Version-4.8.1-informational?style=flat-square)
 
 Kubernetes and OpenShift Backup Operator based on restic
 
@@ -13,7 +13,7 @@ helm repo add k8up-io https://k8up-io.github.io/k8up
 helm install k8up k8up-io/k8up
 ```
 ```bash
-kubectl apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.0/k8up-crd.yaml
+kubectl apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.1/k8up-crd.yaml --server-side
 ```
 
 <!---
@@ -48,7 +48,7 @@ Document your changes in values.yaml and let `make docs:helm` generate this sect
 | image.pullPolicy | string | `"IfNotPresent"` | Operator image pull policy |
 | image.registry | string | `"ghcr.io"` | Operator image registry |
 | image.repository | string | `"k8up-io/k8up"` | Operator image repository |
-| image.tag | string | `"v2.10.0"` | Operator image tag (version) |
+| image.tag | string | `"v2.11.0"` | Operator image tag (version) |
 | imagePullSecrets | list | `[]` |  |
 | k8up.backupImage.repository | string | `""` | The backup runner image repository. Defaults to `{image.registry}/{image.repository}`. Specify an image repository including registry, e.g. `example.com/repo/image` |
 | k8up.backupImage.tag | string | `""` | The backup runner image tag Defaults to `{image.tag}` |
@@ -63,7 +63,7 @@ Document your changes in values.yaml and let `make docs:helm` generate this sect
 | k8up.skipWithoutAnnotation | bool | `false` | Specifies whether K8up should ignore PVCs without the backup annotation (by default, `k8up.io/backup`) |
 | k8up.timezone | string | `""` | Specifies the timezone K8up is using for scheduling. Empty value defaults to the timezone in which Kubernetes is deployed. Accepts `tz database` compatible entries, e.g. `Europe/Zurich` |
 | metrics.grafanaDashboard.additionalLabels | object | `{}` | Add labels to the Grafana Dashboard object |
-| metrics.grafanaDashboard.enable | bool | `false` | Whether to deploy the Grafana dashboard |
+| metrics.grafanaDashboard.enabled | bool | `false` | Whether to deploy the Grafana dashboard |
 | metrics.grafanaDashboard.namespace | string | `""` | If the object should be installed in a different namespace than operator |
 | metrics.prometheusRule.additionalLabels | object | `{}` | Add labels to the PrometheusRule object |
 | metrics.prometheusRule.additionalRules | list | `[]` | Provide additional alert rules in addition to the defaults |
@@ -84,6 +84,7 @@ Document your changes in values.yaml and let `make docs:helm` generate this sect
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` | Annotations to add to the Pod spec. |
 | podSecurityContext | object | `{}` | Security context to add to the Pod spec. |
+| priorityClassName | string | `""` | The name of the priority class to use. |
 | rbac.create | bool | `true` | Create cluster roles and rolebinding. May need elevated permissions to create cluster roles and -bindings. |
 | replicaCount | int | `1` | How many operator pods should run. Note: Operator features leader election for K8s 1.16 and later, so that only 1 pod is reconciling/scheduling jobs. Follower pods reduce interruption time as they're on hot standby when leader is unresponsive. |
 | resources.limits.memory | string | `"256Mi"` | Memory limit of K8up operator. See [supported units][resource-units]. |
